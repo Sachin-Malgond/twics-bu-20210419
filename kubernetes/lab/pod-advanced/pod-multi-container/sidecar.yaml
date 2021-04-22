@@ -10,14 +10,14 @@ spec:
   - name: main-container
     image: alpine 
     command: ["/bin/sh"]
-    args: ["-c", "ping google.com >> /tmp/index.html; sleep 60;done"]
+    args: ["-c", "while true; do date >> /var/log/index.html; sleep 10;done"]
     volumeMounts:
     - name: shared-logs
-      mountPath: /tmp
+      mountPath: /var/log
   - name: sidecar-container
     image: nginx
     ports:
       - containerPort: 80
     volumeMounts:
     - name: shared-logs
-      mountPath: /usr/share/nginx/html
+      mountPath: /usr/share/nginx/html 
